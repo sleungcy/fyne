@@ -18,6 +18,7 @@ import (
 	"fyne.io/fyne/v2/internal/driver"
 	"fyne.io/fyne/v2/internal/driver/common"
 	"fyne.io/fyne/v2/internal/scale"
+	glfw "github.com/fyne-io/glfw-js"
 )
 
 const (
