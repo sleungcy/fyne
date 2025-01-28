@@ -25,7 +25,9 @@ type window struct {
 	menu      *fyne.MainMenu
 	handle    uintptr // the window handle - currently just Android
 }
-
+func (w *window) SetPosition(fyne.Position) {
+	// no-op
+}
 func (w *window) Title() string {
 	return w.title
 }

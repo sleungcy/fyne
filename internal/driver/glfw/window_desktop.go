@@ -82,7 +82,7 @@ type window struct {
 	fullScreen bool
 	centered   bool
 	visible    bool
-
+	requestedX, requestedY          int
 	mouseLock            sync.RWMutex
 	mousePos             fyne.Position
 	mouseDragged         fyne.Draggable
@@ -111,7 +111,12 @@ type window struct {
 
 	pending []func()
 }
-
+func (w *window) handlePosition() {
+	w.viewLock.RLock()
+	view := w.viewport
+	w.viewLock.RUnlock()
+	view.SetPos(w.requestedX, w.requestedY)
+}
 func (w *window) SetFullScreen(full bool) {
 	w.fullScreen = full
 	if !w.visible {

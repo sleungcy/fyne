@@ -102,4 +102,10 @@ type Window interface {
 
 	// Clipboard returns the system clipboard
 	Clipboard() Clipboard
+	
+	// SetPosition sets the position of the window to the requested position.
+	// The result may not be exactly as desired due to various desktop or
+	// platform constraints.
+	SetPosition(Position)
+	Topmost(bool)
 }

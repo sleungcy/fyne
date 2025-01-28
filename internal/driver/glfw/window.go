@@ -25,6 +25,25 @@ const (
 	windowIconSize    = 256
 )
 
+func (w *window) Topmost(makeTopmost bool) {
+	// runs non blocking code
+	w.runOnMainWhenCreated(func() {
+		// setup topmost value
+		topmost := 0
+		if makeTopmost {
+			topmost = 1
+		}
+		// call the glfw.Window.SetAttrib function using glfw.Floating as the attrib and the topmost integer value
+		w.view().SetAttrib(glfw.Floating, topmost)
+	})
+}
+
+func (w *window) SetPosition(pos fyne.Position) {
+	w.requestedX = int(pos.X)
+	w.requestedY = int(pos.Y)
+	w.runOnMainWhenCreated(w.handlePosition)
+}
+
 func (w *window) Title() string {
 	return w.title
 }
@@ -151,6 +170,8 @@ func (w *window) doShow() {
 		w.viewLock.Lock()
 		w.visible = true
 		w.viewLock.Unlock()
+		
+		w.handlePosition()
 		view := w.view()
 		view.SetTitle(w.title)
 
