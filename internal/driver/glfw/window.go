@@ -18,7 +18,7 @@ import (
 	"fyne.io/fyne/v2/internal/driver"
 	"fyne.io/fyne/v2/internal/driver/common"
 	"fyne.io/fyne/v2/internal/scale"
-	glfw "github.com/fyne-io/glfw-js"
+	glfw "github.com/go-gl/glfw/v3.3/glfw"
 )
 
 const (
@@ -171,7 +171,7 @@ func (w *window) doShow() {
 		w.viewLock.Lock()
 		w.visible = true
 		w.viewLock.Unlock()
-		
+
 		w.handlePosition()
 		view := w.view()
 		view.SetTitle(w.title)
